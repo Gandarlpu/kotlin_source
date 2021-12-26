@@ -21,6 +21,14 @@ class MainActivity : AppCompatActivity() {
 
         // myfriend설계도 생성
         var myfriend = MyFriend()
+        myfriend.name = "이름"
+        myfriend.age = 12
+        myfriend.isMarried = false
+        myfriend.nickname = "닉네임"
+        println("MyFriend : ${myfriend.name}")
+        println("MyFriend : ${myfriend.age}")
+        println("MyFriend : ${myfriend.isMarried}")
+        println("MyFriend : ${myfriend.nickname}")
 
         // 매개변수가 들어가는 생성자
         var myFriendChulsoo = MyFriendWithParams(name = "철수"
@@ -45,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_2.name} ")
         Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_2.age} ")
 
-        var myFriendJames_3 = MyFriendWithMoreParams(name = "제임스" , age = 50 , isMarried = true , nickname = "본드")
+        var myFriendJames_3 = MyFriendWithMoreParams(name = "제임스" , age = 50 , isMarried = true)
         Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_3.name}")
         Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_3.age}")
         Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_3.isMarried}")
