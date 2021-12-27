@@ -6,32 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
+    android:gravity="center"
     android:weightSum="1">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="가나다라마바사\n아자차카타파하"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        />
+        android:text="메인 화면"
+        android:textSize="50sp"
+        android:textColor="#000"/>
 
-    <ImageButton
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Create free account"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:background="@drawable/rounded_corner"
-        />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다이얼로그 띄우기"
+        android:textSize="30sp"
+        android:onClick="onDialogBtnClicked"/>
 
 </LinearLayout>

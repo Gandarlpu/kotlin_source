@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MyCustomDialogInterface {
 
     val TAG = "로그"
 
@@ -17,48 +19,35 @@ class MainActivity : AppCompatActivity() {
         // 그릴 xml 뷰 파일을 연결 시켜준다. 즉, 설정한다.
         setContentView(R.layout.activity_main)
 
-        Log.d(TAG, "onCreate: called")
 
-        // myfriend설계도 생성
-        var myfriend = MyFriend()
-        myfriend.name = "이름"
-        myfriend.age = 12
-        myfriend.isMarried = false
-        myfriend.nickname = "닉네임"
-        println("MyFriend : ${myfriend.name}")
-        println("MyFriend : ${myfriend.age}")
-        println("MyFriend : ${myfriend.isMarried}")
-        println("MyFriend : ${myfriend.nickname}")
-
-        // 매개변수가 들어가는 생성자
-        var myFriendChulsoo = MyFriendWithParams(name = "철수"
-            , age = 17
-            , isMarried = false
-            , nickname = "안철수"
-            , address = "대한민국")
-
-        // 매개변수가 일정하게 들억자ㅣ않으면 에러가 뜬다.
-        // 추가 생성자로 처리를 해놔야 에러가 뜨지 않는다.
-        var myFriendSoosan = MyFriendWithParams(name = "철수"
-            , age = 17
-            , isMarried = false
-            , nickname = "ㅎㅇ")
+        // myCustomDialog의 구독과 좋아요 버튼을 눌렀을 때 처리를 메인에서 받아와서 해줘야 한다.
+        // 따라서, Interface로 만들어서 처리한다.
 
 
-        // 추가 생성자로 되어있는 친구 객체
-        var myFriendJames_1 = MyFriendWithMoreParams()
-        Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_1.name}")
-
-        var myFriendJames_2 = MyFriendWithMoreParams(name = "제임스")
-        Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_2.name} ")
-        Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_2.age} ")
-
-        var myFriendJames_3 = MyFriendWithMoreParams(name = "제임스" , age = 50 , isMarried = true)
-        Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_3.name}")
-        Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_3.age}")
-        Log.d(TAG, "onCreate: MyFreidJames.name : ${myFriendJames_3.isMarried}")
+    }
 
 
+    // XML에서 onclick로 하면 따로 onClickListener로 코드 추가를 시켜줄 필요가 없음
+    fun onDialogBtnClicked(view : View){
+
+        // MyCustomDialoginterface가 클래스에서 들어왔기 때문에
+        // AppCompatActivity = this 와 Interface = this 2개를 넘겨줘야 한다.
+        val myCustomDialog = MyCustomDialog(this , this)
+
+        myCustomDialog.show()
+
+    }
+
+    // 구독버튼 클릭
+    override fun onSubscribeBtnClicked() {
+        Log.d(TAG, "onSubscribeBtnClicked: called")
+        Toast.makeText(this , "구독버튼 클릭" , Toast.LENGTH_SHORT).show()
+    }
+
+    // 좋아요 버튼 클릭
+    override fun onLikeBtnClicked() {
+        Log.d(TAG, "onSubscribeBtnClicked: called")
+        Toast.makeText(this , "좋아요버튼 클릭" , Toast.LENGTH_SHORT).show()
     }
 
 }
