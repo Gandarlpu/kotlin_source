@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/82107/AndroidStudioProjects/Callback_Tuturial/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2361111111111111" />
         <entry key="..\:/Users/82107/AndroidStudioProjects/Callback_Tuturial/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.22962962962962963" />
         <entry key="..\:/Users/82107/AndroidStudioProjects/Callback_Tuturial/app/src/main/res/drawable/rounded_corner.xml" value="0.23703703703703705" />
         <entry key="..\:/Users/82107/AndroidStudioProjects/Callback_Tuturial/app/src/main/res/layout/activity_main.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/82107/AndroidStudioProjects/Callback_Tuturial/app/src/main/res/layout/custom_dialog.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/82107/AndroidStudioProjects/Callback_Tuturial/app/src/main/res/layout/layout_intro_pager_item.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>

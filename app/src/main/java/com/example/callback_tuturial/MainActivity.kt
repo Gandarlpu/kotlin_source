@@ -6,48 +6,57 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MyCustomDialogInterface {
+class MainActivity : AppCompatActivity(){
 
-    val TAG = "로그"
+    // 상수 처리
+    companion object{
+        private const val TAG = "로그"
+    }
 
-    // 뷰가 생성되었을 때
+    // 데이터 배열 선언
+    private var pageItemList = ArrayList<PageItem>()
+    private lateinit var myIntroPagerRecyclerAdapter: MyIntroPagerRecyclerAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 그릴 xml 뷰 파일을 연결 시켜준다. 즉, 설정한다.
         setContentView(R.layout.activity_main)
 
+        Log.d(TAG, "onCreate: called")
 
-        // myCustomDialog의 구독과 좋아요 버튼을 눌렀을 때 처리를 메인에서 받아와서 해줘야 한다.
-        // 따라서, Interface로 만들어서 처리한다.
+        previous_btn.setOnClickListener {
+            my_intro_view_pager.currentItem = my_intro_view_pager.currentItem - 1
+        }
+
+        next_btn.setOnClickListener {
+            my_intro_view_pager.currentItem = my_intro_view_pager.currentItem + 1
+        }
+
+        // 데이터 배열을 준비
+        pageItemList.add(PageItem(R.color.colorOrange , R.drawable.ic_pager_item_1 , "안녕하세요\n 개발중입니다."))
+        pageItemList.add(PageItem(R.color.colorBlue , R.drawable.ic_pager_item_2 , "구독, 좋아요 눌러주세요!"))
+        pageItemList.add(PageItem(R.color.colorWhite , R.drawable.ic_pager_item_3 , "알람설정 부탁드립니다."))
+
+
+        // 어답터 인스턴스 생성
+        myIntroPagerRecyclerAdapter = MyIntroPagerRecyclerAdapter(pageItemList)
+
+        // apply = id를 중복으로 써주지 않아도 됨.
+        my_intro_view_pager.apply {
+            adapter = myIntroPagerRecyclerAdapter
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            dots_indicator.setViewPager2(this)
+        }
+//        my_intro_view_pager.adapter = myIntroPagerRecyclerAdapter
+//        my_intro_view_pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
 
 
     }
 
-
-    // XML에서 onclick로 하면 따로 onClickListener로 코드 추가를 시켜줄 필요가 없음
-    fun onDialogBtnClicked(view : View){
-
-        // MyCustomDialoginterface가 클래스에서 들어왔기 때문에
-        // AppCompatActivity = this 와 Interface = this 2개를 넘겨줘야 한다.
-        val myCustomDialog = MyCustomDialog(this , this)
-
-        myCustomDialog.show()
-
-    }
-
-    // 구독버튼 클릭
-    override fun onSubscribeBtnClicked() {
-        Log.d(TAG, "onSubscribeBtnClicked: called")
-        Toast.makeText(this , "구독버튼 클릭" , Toast.LENGTH_SHORT).show()
-    }
-
-    // 좋아요 버튼 클릭
-    override fun onLikeBtnClicked() {
-        Log.d(TAG, "onSubscribeBtnClicked: called")
-        Toast.makeText(this , "좋아요버튼 클릭" , Toast.LENGTH_SHORT).show()
-    }
 
 }
